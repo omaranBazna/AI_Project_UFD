@@ -1,5 +1,6 @@
-let threshold = 0.1;
-
+let thresholdC = 0.1;
+let thresholdT = 0.1;
+let thresholdS = 0.1;
 const parameterOfShape = (array) => {
   let p = 0;
   for (let i = 1; i < array.length; i++) {
@@ -57,8 +58,8 @@ const centerOfShape = (array) => {
 ///@Rahoul add clear description how this function work to the report
 export const evaluateCircle = (array) => {
   ///calculate the area of the shape
-  ///calculate the parameter of the shope
-  ///A/P^2  =1/(4*PI)
+  ///calculate the parameter of the shape
+  ///A/P^2  =1/(4*PI) ///in any circle is correct and there is no other shape
   const parameter = parameterOfShape(array);
   const [centerX, centerY] = centerOfShape(array);
   const area = areaOfShape(array, centerX, centerY);
@@ -66,7 +67,8 @@ export const evaluateCircle = (array) => {
   ///in perfect circle delta=1
   const delta = (area / (parameter * parameter)) * 4 * Math.PI;
 
-  if (Math.abs(delta - 1) < threshold) {
+  if (Math.abs(delta - 1) < thresholdC) {
+    //increasing threshold increase sensitivity  ///decrease accuracy
     return true;
   } else {
     return false;
@@ -76,15 +78,20 @@ export const evaluateCircle = (array) => {
 export const evaluateSquare = (array) => {
   ///calculate the area of the shape
   ///calculate the parameter of the shope
-  ///A/P^2  =1/16
+  ///A/P^2  =1/16 =>is correct any square but also for other shapes
+  ///false positive infinite :property is low
   const parameter = parameterOfShape(array);
   const [centerX, centerY] = centerOfShape(array);
   const area = areaOfShape(array, centerX, centerY);
 
+  /**
+   * 90 +-20%
+   *
+   */
   ///in perfect circle delta=1
   const delta = (area / (parameter * parameter)) * 16;
 
-  if (Math.abs(delta - 1) < threshold) {
+  if (Math.abs(delta - 1) < thresholdS) {
     return true;
   } else {
     return false;
@@ -102,12 +109,14 @@ export const evaluateTriangle = (array) => {
   ///in perfect circle delta=1
   const delta = ((area / (parameter * parameter)) * 36) / Math.sqrt(3);
 
-  if (Math.abs(delta - 1) < threshold) {
+  if (Math.abs(delta - 1) < thresholdT) {
     return true;
   } else {
     return false;
   }
 };
+
+export const evaluateShape = (array, shapeCatogorey) => {};
 
 const drawPath = (ctx, points, closePath) => {
   const region = new Path2D();
