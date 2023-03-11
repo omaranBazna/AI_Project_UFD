@@ -1,3 +1,4 @@
+// Threshold can be adjusted to increase efficiency of indetified shape
 let threshold = 0.1;
 
 const parameterOfShape = (array) => {
