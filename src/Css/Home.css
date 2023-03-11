@@ -1,0 +1,76 @@
+ #root{
+    background-image: url(/static/media/preschool-background.32f2e86c.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: -10px;
+    height: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding-top: 100px;
+}
+
+h1{
+    font-size: xx-large;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.welcome{
+    background-color: transparent
+}
+
+@font-face {
+    font-family: RampartOne;
+    src: url(../fonts/RampartOne-Regular.ttf);
+}
+
+@font-face {
+    font-family: Permanent;
+    src: url(../fonts/PermanentMarker-Regular.ttf);
+}
+.welcome{
+    font-size: 120px;
+    font-family: RampartOne;
+    color: rgb(48, 48, 160);
+}
+
+.hello{
+    font-family: fantasy;
+    font-size: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 30px;
+    color: rgb(91, 60, 119);
+}
+
+img {
+    --_g: 10% /45% 45% no-repeat linear-gradient(#000 0 0);
+    --m:
+      left   var(--_i,0%) top    var(--_g),
+      bottom var(--_i,0%) left   var(--_g),
+      top    var(--_i,0%) right  var(--_g),
+      right  var(--_i,0%) bottom var(--_g);
+    -webkit-mask: var(--m);
+            mask: var(--m);
+    filter: grayscale();
+    transition: .3s linear;
+    cursor: pointer;
+    width: 230px;
+    height: 200px;
+  }
+  img:hover {
+    --_i: 10%;
+    filter: grayscale(0);
+  }
+
+  .games{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 30px;
+    margin-top: 30px;
+    border-radius: 8px;
+  }
