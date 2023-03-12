@@ -191,8 +191,8 @@ function Shape() {
 						right: 0,
 						textAlign: "center",
 						zindex: 9,
-						width: 1040,
-						height: 880,
+						width: 640,
+						height: 480,
 					}}
 					mirrored={true}
 				/>
@@ -204,7 +204,7 @@ function Shape() {
 							marginLeft: "auto",
 							marginRight: "auto",
 							left: 0,
-							right: -20,
+							right: 0,
 							textAlign: "center",
 							zindex: 9,
 							width: 640,
