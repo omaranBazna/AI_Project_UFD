@@ -1,5 +1,5 @@
  #root{
-    background-image: url(/static/media/preschool-background.32f2e86c.jpg);
+    background-image: url("../assets/preschool-background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     margin-top: -10px;
