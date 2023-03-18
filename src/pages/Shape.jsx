@@ -63,9 +63,12 @@ function Shape() {
 				console.log(array)
 				const ctx = canvasRef.current.getContext("2d")
 				if (array.length > 0) {
+
+
 					ctx.beginPath()
+
 					ctx.fillStyle = "Black"
-					ctx.lineWidth = 10
+					ctx.lineWidth = 5
 					ctx.moveTo(array[0].x, array[0].y)
 					for (let { x, y } of array) {
 						ctx.lineTo(x, y)
@@ -92,7 +95,7 @@ function Shape() {
             Math.sqrt(
               (centerX - array[0].x) * (centerX - array[0].x) +
                 (centerY - array[0].y) * (centerY - array[0].y)
-            ) < 10 &&
+            ) < 30 &&
             index > 30
           ) {
             console.log("close the shape");
@@ -121,10 +124,39 @@ function Shape() {
 						///evaluate the shape
 					}
 					ctx.beginPath()
+          /*
+          let base_image = new Image();
+          base_image.src = 'https://img.icons8.com/color/120/paint-brush.png';
+          base_image.style.width="20px"
+          ctx.drawImage(base_image, centerX-80, centerY-80);
+          */
+           
 					ctx.fillStyle = "lightblue"
-					ctx.arc(centerX, centerY, 20, 0, 2 * 3.14)
-
+          ctx.strokeStyle="black"
+					ctx.arc(centerX, centerY, 10, 0, 2 * 3.14)
+            
 					ctx.fill()
+          ctx.stroke()
+
+					ctx.closePath()
+
+
+          ctx.beginPath()
+          /*
+          let base_image = new Image();
+          base_image.src = 'https://img.icons8.com/color/120/paint-brush.png';
+          base_image.style.width="20px"
+          ctx.drawImage(base_image, centerX-80, centerY-80);
+          */
+           if(array.length>0){
+					ctx.fillStyle = "red"
+          ctx.strokeStyle="black"
+					ctx.arc(array[0].x, array[0].y, 6, 0, 2 * 3.14)
+            
+					ctx.fill()
+          ctx.stroke()
+           }
+
 					ctx.closePath()
 
 					ctx.beginPath()
