@@ -53,7 +53,7 @@ h1{
     color: rgb(91, 60, 119);
 }
 
-img {
+.logo-home {
     --_g: 10% /45% 45% no-repeat linear-gradient(#000 0 0);
     --m:
       left   var(--_i,0%) top    var(--_g),
@@ -68,7 +68,7 @@ img {
     width: 230px;
     height: 200px;
   }
-  img:hover {
+  .logo-home:hover {
     --_i: 10%;
     filter: grayscale(0);
   }
