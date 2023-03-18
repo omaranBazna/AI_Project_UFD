@@ -11,8 +11,9 @@ function Shape() {
   const [result, setResult] = useState("draw the shape");
   const [timer, setTimer] = useState(0);
   const [drawing, setDrawing] = useState(true);
-  let array = []; // this array will collect points for shapes, [x,y]
-  let index = 0;
+  const [selected,setSelected]=useState("1")
+  let array=[] // this array will collect points for shapes, [x,y]
+  let index=0;
   let lastX = -1;
   let lastY = -1;
 
@@ -92,6 +93,11 @@ function Shape() {
               ///pop up window React Bootstrap//sound effect
               
               console.log("You draw circle Good job!!");
+              if(selected==1){
+                  alert("wrong shape")
+              }else{
+                   
+              }
               setResult("Circle");
             } else if (evaluateSquare(array)) {
               console.log("you draw square Good job!!");
@@ -139,15 +145,15 @@ function Shape() {
 
   useEffect(() => {
     runHandpose();
+
+   let el=document.getElementById("resetBtn")
+   el.addEventListener("click",resetShape)
+   return ()=>{el.removeEventListener("click",resetShape)}
   }, []);
 
   return (
     <div className="App">
-      <button
-        onClick={() => {
-          resetShape();
-        }}
-      >
+      <button id="resetBtn">
         Reset{" "}
       </button>
 
@@ -169,8 +175,31 @@ function Shape() {
       <div>
         <span>{drawing ? "" : "press the button to start drawing"}</span>
       </div>
+
       <h1>Last Result: {result}</h1>
       <h2>{timer}</h2>
+        <div style={{position:"fixed",right:"10px",top:"10px",width:"100px",height:"100px"}}>
+              <select value={selected} onChange={(e)=>setSelected(e.target.value)}>
+                <option value="1">Circle</option>
+                <option value="2">Square</option>
+                <option value="3">Triangle</option>
+                <option value="4">Random</option>
+              </select>
+
+              <div>
+                True Positive:
+              </div>
+              <div>
+                True Negative:
+              </div>
+              <div>
+                False Positive:
+              </div>
+              <div>
+                False Negative:
+              </div>
+
+        </div>
       <header className="App-header">
         <Webcam
           ref={webcamRef}

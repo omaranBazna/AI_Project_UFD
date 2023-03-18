@@ -1,29 +1,38 @@
 import React, { useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
-//import * as facemesh from "@tensorflow-models/facemesh";
 import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
-import * as fp from "fingerpose";
+
 import Webcam from "react-webcam";
-import { evaluateCircle, evaluateSquare, evaluateTriangle } from "../utilities";
 import "../App.css";
 function Avatar() {
   const webcamRef = useRef(null);
-  const canvasRef = useRef(null);
-  const [result, setResult] = useState("draw the shape");
-  const [timer, setTimer] = useState(0);
-  const [drawing, setDrawing] = useState(true);
-  let array = []; // this array will collect points for shapes, [x,y]
-  let index = 0;
-  let lastX = -1;
-  let lastY = -1;
 
-  const resetShape = () => {
-    index = 0;
-    array = [];
-    setDrawing(false);
-  };
+  const [eye,setEye]=useState("eye1")
+  const [nose,setNose]=useState("nose1")
+  const [mouth,setMouth]=useState("mouth1")
+  
+  
+  
+  let data={
+   eye1:{
+    left:"https://i.ibb.co/cCt4nnk/leftEye.jpg",
+    right:"https://i.ibb.co/30ZmHZn/rightEye.jpg"
+   },
+   nose1:"https://www.shutterstock.com/image-vector/nose-vector-illustration-260nw-755300977.jpg",
+   mouth1:"https://cdn2.vectorstock.com/i/1000x1000/93/76/smile-mouth-and-tongue-isolated-cartoon-design-vector-26949376.jpg",
 
-  const runHandpose = async () => {
+   eye2:{
+    left:"",
+    right:""
+   },
+   nose2:"https://c8.alamy.com/comp/2BH5KRB/cartoon-character-design-concept-of-nose-cartoon-design-style-with-wink-eye-2BH5KRB.jpg",
+   mouth2:"https://cdn2.vectorstock.com/i/1000x1000/93/76/smile-mouth-and-tongue-isolated-cartoon-design-vector-26949376.jpg"
+
+  }
+  const [leftEye,setLeftEye]=useState({x:0,y:0,z:0})
+  const [rightEye,setRightEye]=useState({x:0,y:0,z:0})
+  const [nosep,setNosep]=useState({x:0,y:0,z:0})
+  const runFace = async () => {
 
     const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
     const detectorConfig = {
@@ -37,9 +46,8 @@ function Avatar() {
     },10)
   }
   const detect = async (net) => {
-    // Check data is available
- 
-    
+  
+
     if (
       typeof webcamRef.current !== "undefined" &&
       webcamRef.current !== null &&
@@ -53,139 +61,51 @@ function Avatar() {
       // Set video width
       webcamRef.current.video.width = videoWidth;
       webcamRef.current.video.height = videoHeight;
-       console.log(video)
-      const hand= await net.estimateFaces(video);
-      console.log(hand);
+      
 
-      return
+    
 
-      if (canvasRef != null && canvasRef.current != null) {
-        canvasRef.current.width = videoWidth;
-        canvasRef.current.height = videoHeight;
-
-        const hand= await net.estimateFaces({input:video});
-        console.log(hand);
-  
-        if (!drawing) {
-          return;
-        }
-        const ctx = canvasRef.current.getContext("2d");
-        if (array.length > 0) {
-          ctx.beginPath();
-          ctx.fillStyle = "Black";
-          ctx.lineWidth = 15;
-          ctx.moveTo(array[0].x, array[0].y);
-          for (let { x, y } of array) {
-            ctx.lineTo(x, y);
-          }
-          ctx.stroke();
-          ctx.closePath();
-        }
-        if (hand.length > 0) {
-          let centerX = 0;
-          let centerY = 0;
-          let centerZ = 0;
-
-          for (let [x, y, z] of hand[0].landmarks) {
-            centerX += (640 - x) * 1;
-            centerY += y * 1;
-            centerZ += z * 1;
-          }
-          centerX = centerX / 21;
-          centerY = centerY / 21;
-          centerZ = centerZ / 21;
-
-          array.push({ x: centerX, y: centerY });
-          if (
-            Math.sqrt(
-              (centerX - array[0].x) * (centerX - array[0].x) +
-                (centerY - array[0].y) * (centerY - array[0].y)
-            ) < 10 &&
-            index > 30
-          ) {
-            console.log("close the shape");
-            if (evaluateCircle(array)) {
-              ////@Enea add to the UI a pop up window  you draw a circle Good Job
-              console.log("You draw circle Good job!!");
-              setResult("Circle");
-            } else if (evaluateSquare(array)) {
-              console.log("you draw square Good job!!");
-              setResult("Square");
-            } else if (evaluateTriangle(array)) {
-              console.log("you draw triangle Good job!!");
-              setResult("Triangle");
-            } else {
-              setResult("Random shape");
+        const face= await net.estimateFaces(video);
+       console.log(face&&face[0] &&face[0].keypoints && face[0].keypoints.map((item,index)=>{
+            if(item.hasOwnProperty("name") && item["name"].includes("lips")){
+              return {
+                ...item,
+                index
+              }
+            }else{
+              return -1
             }
-            resetShape();
-
-            ///evaluate the shape
-          }
-          ctx.beginPath();
-          ctx.fillStyle = "lightblue";
-          ctx.arc(centerX, centerY, 20, 0, 2 * 3.14);
-
-          ctx.fill();
-          ctx.closePath();
-
-          ctx.beginPath();
-          ctx.lineWidth = "3";
-          ctx.strokeStyle = "red";
-          ctx.beginPath();
-          ctx.moveTo(centerX, centerY);
-
-          index += 1;
-
-          ctx.stroke();
-          ctx.closePath();
-
-          if (lastX > 0) {
-            let dx = centerX - lastX;
-            let dy = centerY - lastY;
-          }
-
-          lastX = centerX;
-          lastY = centerY;
-          /// drawHand(hand, ctx);
-        }
+        }).filter(item=>item !=-1))
+       console.log(face&& face[0] && face[0].keypoints[249])
+       if(face && face[0]){
+       setLeftEye(face[0].keypoints[249])
+       setRightEye(face[0].keypoints[7])
+       setNosep(face[0].keypoints[0])
+       }
       }
-    }
+    
   };
 
   useEffect(() => {
-    runHandpose();
+    runFace();
   }, []);
 
   return (
     <div className="App">
-      <button
-        onClick={() => {
-          resetShape();
-        }}
-      >
-        Reset{" "}
-      </button>
+      <select value={eye} onChange={(e)=>setEye(e.target.value)}>
+        <option value="eye1">Eye1</option>
+        <option value="eye2">Eye2</option>
+      </select>
+      <select value={nose} onChange={(e)=>setNose(e.target.value)}>
+        <option value="nose1">Nose1</option>
+        <option value="nose2">Nose2</option>
+      </select>
+      <select value={mouth} onChange={(e)=>setMouth(e.target.value)}>
+        <option value="mouth1">Mouth1</option>
+        <option value="mouth2">Mouth2</option>
+      </select>
 
-      <button
-        onClick={() => {
-          let time = 3;
-          let interval = setInterval(() => {
-            time--;
-            setTimer(time);
-          }, 1000);
-          setTimeout(() => {
-            setDrawing(true);
-            clearInterval(interval);
-          }, 3000);
-        }}
-      >
-        Start drawing
-      </button>
-      <div>
-        <span>{drawing ? "" : "press the button to start drawing"}</span>
-      </div>
-      <h1>Last Result: {result}</h1>
-      <h2>{timer}</h2>
+      
       <header className="App-header">
         <Webcam
           ref={webcamRef}
@@ -197,27 +117,19 @@ function Avatar() {
             right: 0,
             textAlign: "center",
             zindex: 9,
-            width: 640,
+            width: 1200,
             height: 480,
           }}
           mirrored={true}
-        />
-        {drawing && (
-          <canvas
-            ref={canvasRef}
-            style={{
-              position: "absolute",
-              marginLeft: "auto",
-              marginRight: "auto",
-              left: 0,
-              right: 0,
-              textAlign: "center",
-              zindex: 9,
-              width: 640,
-              height: 480,
-            }}
-          />
-        )}
+        ></Webcam>
+        
+          <img src={data[eye].left} style={{position:"absolute",top:leftEye.y*1+60,left:940-leftEye.x,width:"50px"}} />
+          <img src={data[eye].right} style={{position:"absolute",top:rightEye.y*1+60,left:920-rightEye.x,width:"50px"}} />
+          <img src={data[nose]} style={{position:"absolute",top:nosep.y*1+20,left:930-nosep.x,width:"60px"}} />
+          <img src={data[mouth]} style={{position:"absolute",top:nosep.y*1+70,left:920-nosep.x,width:"80px"}} />
+      
+      
+        
       </header>
     </div>
   );
