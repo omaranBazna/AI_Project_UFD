@@ -8,6 +8,7 @@ import Webcam from "react-webcam"
 import { evaluateCircle, evaluateSquare, evaluateTriangle } from "../utilities"
 import "../App.css"
 import "../Css/Shapes.css"
+
 function Shape() {
 	const webcamRef = useRef(null)
 	const canvasRef = useRef(null)
@@ -20,8 +21,10 @@ function Shape() {
 	let lastY = -1
 
 	const resetShape = () => {
+		console.log("before", array)
 		index = 0
 		array = []
+		console.log("after", array)
 		setDrawing(false)
 	}
 
@@ -32,6 +35,7 @@ function Shape() {
 			detect(net)
 		}, 10)
 	}
+
 	const detect = async (net) => {
 		// Check data is available
 		if (
@@ -55,6 +59,7 @@ function Shape() {
 				if (!drawing) {
 					return
 				}
+				console.log(array)
 				const ctx = canvasRef.current.getContext("2d")
 				if (array.length > 0) {
 					ctx.beginPath()
@@ -86,7 +91,7 @@ function Shape() {
 						Math.sqrt(
 							(centerX - array[0].x) * (centerX - array[0].x) +
 								(centerY - array[0].y) * (centerY - array[0].y)
-						) < 10 &&
+						) < 30 &&
 						index > 30
 					) {
 						console.log("close the shape")
@@ -147,71 +152,106 @@ function Shape() {
 	return (
 		<div className="App">
 			<div className="timer-button">
-				<div className="buton1">
-					<button
-						class="button-92"
-						role="button"
-						onClick={() => {
-							resetShape()
-						}}>
-						RESET
-					</button>
-
-					<button
-						class="button-92"
-						role="button"
-						onClick={() => {
-							let time = 3
-							let interval = setInterval(() => {
-								time--
-								setTimer(time)
-							}, 1000)
-							setTimeout(() => {
-								setDrawing(true)
-								clearInterval(interval)
-							}, 3000)
-						}}>
-						START DRAWING
-					</button>
-				</div>
 				<div className="result">
-					<span>{drawing ? "" : "press the button to start drawing"}</span>
+					{/* <span className="timer">
+						{drawing ? "" : "press the button to start drawing"}
+					</span> */}
 					<h1>Last Result: {result}</h1>
-					<h2>{timer}</h2>
 				</div>
-			</div>
-			<div>
-				<Webcam
-					ref={webcamRef}
-					style={{
-						position: "absolute",
-						marginLeft: "auto",
-						marginRight: "auto",
-						left: 0,
-						right: 0,
-						textAlign: "center",
-						zindex: 9,
-						width: 640,
-						height: 480,
-					}}
-					mirrored={true}
-				/>
-				{drawing && (
-					<canvas
-						ref={canvasRef}
-						style={{
-							position: "absolute",
-							marginLeft: "auto",
-							marginRight: "auto",
-							left: 0,
-							right: 0,
-							textAlign: "center",
-							zindex: 9,
-							width: 640,
-							height: 480,
-						}}
-					/>
-				)}
+				<div className="button-web">
+					<div className="buton1" hidden>
+						<button id="resetBtn" href="#" class="button button--piyo">
+							<div class="button__wrapper">
+								<span class="button__text">Reset</span>
+							</div>
+							<div class="characterBox">
+								<div class="character wakeup">
+									<div class="character__face"></div>
+								</div>
+								<div class="character wakeup">
+									<div class="character__face"></div>
+								</div>
+								<div class="character">
+									<div class="character__face"></div>
+								</div>
+							</div>
+						</button>
+
+						<button
+							onClick={() => {
+								let time = 5
+								let interval = setInterval(() => {
+									time--
+									setTimer(time)
+								}, 1000)
+								setTimeout(() => {
+									setDrawing(true)
+									clearInterval(interval)
+								}, 5000)
+							}}
+							href="#"
+							class="button button--hoo">
+							<div class="button__wrapper">
+								<span class="button__text">Draw</span>
+							</div>
+							<div class="characterBox">
+								<div class="character wakeup">
+									<div class="character__face"></div>
+									<div class="charactor__face2"></div>
+									<div class="charactor__body"></div>
+								</div>
+								<div class="character wakeup">
+									<div class="character__face"></div>
+									<div class="charactor__face2"></div>
+									<div class="charactor__body"></div>
+								</div>
+								<div class="character">
+									<div class="character__face"></div>
+									<div class="charactor__face2"></div>
+									<div class="charactor__body"></div>
+								</div>
+							</div>
+						</button>
+						<h1 className="Statement">Press DRAW to start</h1>
+						<div>
+							<h2 className="timer">{timer}</h2>
+						</div>
+					</div>
+					<div>
+						<Webcam
+							className="webcam"
+							ref={webcamRef}
+							style={{
+								position: "absolute",
+								marginLeft: "auto",
+								marginRight: "auto",
+								left: 0,
+								right: 0,
+								textAlign: "center",
+								zindex: 9,
+								width: 640,
+								height: 480,
+							}}
+							mirrored={true}
+						/>
+						{drawing && (
+							<canvas
+								ref={canvasRef}
+								style={{
+									position: "absolute",
+									marginLeft: "auto",
+									marginRight: "auto",
+									left: 0,
+									right: 0,
+									textAlign: "center",
+									zindex: 9,
+									width: 640,
+									height: 480,
+								}}
+							/>
+						)}
+					</div>
+				</div>
 			</div>
 		</div>
 	)
