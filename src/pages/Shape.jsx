@@ -5,11 +5,12 @@ import * as tf from "@tensorflow/tfjs"
 import * as handpose from "@tensorflow-models/handpose"
 import * as fp from "fingerpose"
 import Webcam from "react-webcam"
-import { evaluateCircle, evaluateSquare, evaluateTriangle } from "../utilities"
+import { evaluateCircle, evaluateSquare, evaluateTriangle,evaluateRectangle } from "../utilities"
 import "../App.css"
 import "../Css/Shapes.css"
 
 function Shape() {
+	
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [result, setResult] = useState("draw the shape");
@@ -22,10 +23,10 @@ function Shape() {
   let lastY = -1;
 
 	const resetShape = () => {
-		console.log("before", array)
+		
 		index = 0
 		array = []
-		console.log("after", array)
+		
 		setDrawing(false)
 	}
 
@@ -60,7 +61,7 @@ function Shape() {
 				if (!drawing) {
 					return
 				}
-				console.log(array)
+				
 				const ctx = canvasRef.current.getContext("2d")
 				if (array.length > 0) {
 
@@ -98,30 +99,25 @@ function Shape() {
             ) < 30 &&
             index > 30
           ) {
-            console.log("close the shape");
+          
             if (evaluateCircle(array)) {
               ////@Enea add to the UI a pop up window  you draw a circle Good Job
               ///pop up window React Bootstrap//sound effect
               
-              console.log("You draw circle Good job!!");
-              if(selected==1){
-                  alert("wrong shape")
-              }else{
-                   
-              }
               setResult("Circle");
             } else if (evaluateSquare(array)) {
-              console.log("you draw square Good job!!");
+            
               setResult("Square");
             } else if (evaluateTriangle(array)) {
-              console.log("you draw triangle Good job!!");
+             
               setResult("Triangle");
-            } else {
+            } else if(evaluateRectangle(array)){
+				setResult("Rectangle")
+			}else {
               setResult("Random shape");
             }
             resetShape();
-
-						///evaluate the shape
+               
 					}
 					ctx.beginPath()
           /*
@@ -193,11 +189,11 @@ function Shape() {
 
 	return (
 		<div className="App">
+
+
 			<div className="timer-button">
 				<div className="result">
-					{/* <span className="timer">
-						{drawing ? "" : "press the button to start drawing"}
-					</span> */}
+				
 					<h1>Last Result: {result}</h1>
 				</div>
 				<div className="button-web">

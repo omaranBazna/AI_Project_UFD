@@ -88,16 +88,16 @@ export const evaluateSquare = (array) => {
   const delta = (area / (parameter * parameter)) * 16;
 
   if (Math.abs(delta - 1) < threshold) {
-    return true;
+    if (evaluateRectangle(array)) {
+      return true;
+    }
+    return false;
   } else {
     return false;
   }
 };
 
 export const evaluateTriangle = (array) => {
-  ///calculate the area of the shape
-  ///calculate the parameter of the shope
-  ///A/P^2  =sqrt(3)/36
   const parameter = parameterOfShape(array);
   const [centerX, centerY] = centerOfShape(array);
   const area = areaOfShape(array, centerX, centerY);
@@ -107,6 +107,45 @@ export const evaluateTriangle = (array) => {
 
   if (Math.abs(delta - 1) < threshold) {
     return true;
+  } else {
+    return false;
+  }
+};
+export const evaluateRectangle = (array) => {
+  const parameter = parameterOfShape(array);
+  const [centerX, centerY] = centerOfShape(array);
+  const area = areaOfShape(array, centerX, centerY);
+
+  let maxX = -Infinity;
+  let minX = Infinity;
+  let maxY = -Infinity;
+  let minY = Infinity;
+
+  for (let el of array) {
+    if (el.x > maxX) {
+      maxX = el.x;
+    }
+    if (el.y > maxY) {
+      maxY = el.y;
+    }
+    if (el.x < minX) {
+      minX = el.x;
+    }
+    if (el.y < minY) {
+      minY = el.y;
+    }
+  }
+
+  let width = maxX - minX;
+  let height = maxY - minY;
+  let boundArea = width * height;
+
+  if (boundArea > 0) {
+    if (Math.abs(area / boundArea) > 0.75) {
+      return true;
+    } else {
+      return false;
+    }
   } else {
     return false;
   }
