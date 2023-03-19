@@ -63,8 +63,10 @@
 .button-web{
   width: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: space-around;
   align-items: start;
+  column-gap: 200px;
+  margin-right: 200px;
 } 
 
 .timer-button{
@@ -76,6 +78,36 @@
   align-items: center;
   flex-direction: column;
   row-gap: 40px;
+}
+
+.image-result{
+  width:3px;
+  height: 3px;
+}
+
+img{
+  padding-top: 20px;
+}
+
+.result{
+  padding-top: 20px;
+}
+
+.rules{
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  width: 1200px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  font-size: 18px;
+}
+
+.li{
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  padding: 8px;
 }
 
 @font-face {
