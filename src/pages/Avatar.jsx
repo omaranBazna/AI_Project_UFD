@@ -4,6 +4,11 @@ import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detec
 
 import Webcam from "react-webcam";
 import "../App.css";
+
+let xCenter=1250;
+let yCenter=145
+
+
 function Avatar() {
   const webcamRef = useRef(null);
 
@@ -15,19 +20,29 @@ function Avatar() {
   
   let data={
    eye1:{
-    left:"https://i.ibb.co/cCt4nnk/leftEye.jpg",
-    right:"https://i.ibb.co/30ZmHZn/rightEye.jpg"
+    left:"http://clipart-library.com/images_k/transparent-cartoon-eyes/transparent-cartoon-eyes-5.jpg",
+    right:"",
+    yPos:70
    },
-   nose1:"https://www.shutterstock.com/image-vector/nose-vector-illustration-260nw-755300977.jpg",
-   mouth1:"https://cdn2.vectorstock.com/i/1000x1000/93/76/smile-mouth-and-tongue-isolated-cartoon-design-vector-26949376.jpg",
-
    eye2:{
-    left:"",
-    right:""
-   },
-   nose2:"https://c8.alamy.com/comp/2BH5KRB/cartoon-character-design-concept-of-nose-cartoon-design-style-with-wink-eye-2BH5KRB.jpg",
-   mouth2:"https://cdn2.vectorstock.com/i/1000x1000/93/76/smile-mouth-and-tongue-isolated-cartoon-design-vector-26949376.jpg"
 
+   },
+   eye3:{
+
+   },
+   eye4:{
+
+   },
+   nose1:"http://clipart-library.com/img/1115576.png",
+   nose2:"",
+   nose3:"",
+   nose4:"",
+   nose5:"",
+   mouth1:"",
+   mouth2:"",
+   mouth3:"",
+   mouth4:"",
+   mouth5:""
   }
   const [leftEye,setLeftEye]=useState({x:0,y:0,z:0})
   const [rightEye,setRightEye]=useState({x:0,y:0,z:0})
@@ -123,10 +138,10 @@ function Avatar() {
           mirrored={true}
         ></Webcam>
         
-          <img src={data[eye].left} style={{position:"absolute",top:leftEye.y*1+60,left:940-leftEye.x,width:"50px"}} />
-          <img src={data[eye].right} style={{position:"absolute",top:rightEye.y*1+60,left:920-rightEye.x,width:"50px"}} />
-          <img src={data[nose]} style={{position:"absolute",top:nosep.y*1+20,left:930-nosep.x,width:"60px"}} />
-          <img src={data[mouth]} style={{position:"absolute",top:nosep.y*1+70,left:920-nosep.x,width:"80px"}} />
+          <img src={data[eye].left} style={{position:"absolute",top:leftEye.y*1+yCenter-data[eye].yPos,left:xCenter+10-leftEye.x,width:"160px"}} />
+          <img src={data[eye].right} style={{position:"absolute",top:rightEye.y*1+yCenter,left:xCenter-10-rightEye.x,width:"50px"}} />
+          <img src={data[nose]} style={{position:"absolute",top:nosep.y*1+yCenter-40,left:xCenter-nosep.x,width:"60px"}} />
+          <img src={data[mouth]} style={{position:"absolute",top:nosep.y*1+yCenter+10,left:xCenter-10-nosep.x,width:"80px"}} />
       
       
         
