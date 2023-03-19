@@ -41,10 +41,9 @@ function Avatar() {
    },
  
    nose1:"http://clipart-library.com/img/1115576.png",
-   nose2:"",
-   nose3:"",
-   nose4:"",
-   nose5:"",
+   nose2:"http://clipart-library.com/images_k/nose-transparent-background/nose-transparent-background-6.jpg",
+   nose3:"http://clipart-library.com/images_k/nose-transparent-background/nose-transparent-background-1.jpg",
+  
    mouth1:"",
    mouth2:"",
    mouth3:"",
@@ -125,6 +124,7 @@ function Avatar() {
       <select value={nose} onChange={(e)=>setNose(e.target.value)}>
         <option value="nose1">Nose1</option>
         <option value="nose2">Nose2</option>
+        <option value="nose3">Nose3</option>
       </select>
       <select value={mouth} onChange={(e)=>setMouth(e.target.value)}>
         <option value="mouth1">Mouth1</option>

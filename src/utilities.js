@@ -1,5 +1,6 @@
 // Threshold can be adjusted to increase efficiency of indetified shape
 let threshold = 0.03;
+/*#threshold */
 
 const parameterOfShape = (array) => {
   let p = 0;
@@ -68,7 +69,7 @@ export const evaluateCircle = (array) => {
   const delta = (area / (parameter * parameter)) * 4 * Math.PI;
 
   console.log(delta);
-
+  /*#threshold circle */
   if (Math.abs(delta - 1) < threshold) {
     return true;
   } else {
@@ -86,7 +87,7 @@ export const evaluateSquare = (array) => {
 
   ///in perfect circle delta=1
   const delta = (area / (parameter * parameter)) * 16;
-
+  /*#threshold square */
   if (Math.abs(delta - 1) < threshold * 3) {
     if (evaluateRectangle(array)) {
       return true;
@@ -104,7 +105,7 @@ export const evaluateTriangle = (array) => {
 
   ///in perfect circle delta=1
   const delta = ((area / (parameter * parameter)) * 36) / Math.sqrt(3);
-
+  /*#threshold triangle */
   if (Math.abs(delta - 1) < threshold * 5) {
     return true;
   } else {
