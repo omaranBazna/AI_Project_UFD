@@ -93,7 +93,7 @@ function Shape() {
 						Math.sqrt(
 							(centerX - array[0].x) * (centerX - array[0].x) +
 								(centerY - array[0].y) * (centerY - array[0].y)
-						) < 30 &&
+						) < 15 &&
 						index > 30
 					) {
 					
