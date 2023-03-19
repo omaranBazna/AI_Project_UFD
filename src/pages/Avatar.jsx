@@ -20,19 +20,26 @@ function Avatar() {
   
   let data={
    eye1:{
-    left:"http://clipart-library.com/images_k/transparent-cartoon-eyes/transparent-cartoon-eyes-5.jpg",
+    left:"http://clipart-library.com/images_k/transparent-cartoon-eyes/transparent-cartoon-eyes-20.png",
     right:"",
     yPos:70
    },
    eye2:{
-
+    left:"http://clipart-library.com/images_k/transparent-cartoon-eyes/transparent-cartoon-eyes-13.png",
+    right:"",
+    yPos:70
    },
    eye3:{
-
-   },
+    left:"http://clipart-library.com/images_k/transparent-cartoon-eyes/transparent-cartoon-eyes-15.png"
+   ,right:"",
+   yPos:70
+  },
    eye4:{
-
+    left:"http://clipart-library.com/images_k/transparent-cartoon-eyes/transparent-cartoon-eyes-18.png"
+    ,right:"",
+    yPos:70
    },
+ 
    nose1:"http://clipart-library.com/img/1115576.png",
    nose2:"",
    nose3:"",
@@ -110,6 +117,10 @@ function Avatar() {
       <select value={eye} onChange={(e)=>setEye(e.target.value)}>
         <option value="eye1">Eye1</option>
         <option value="eye2">Eye2</option>
+        <option value="eye3">Eye3</option>
+        <option value="eye4">Eye4</option>
+        
+        
       </select>
       <select value={nose} onChange={(e)=>setNose(e.target.value)}>
         <option value="nose1">Nose1</option>
