@@ -1,3 +1,7 @@
+ *{
+  margin: 0;
+ }
+
  .App{
   width:100vw;
   margin:0px;
@@ -8,13 +12,12 @@
     background-image: url("../assets/preschool-background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
- 
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: start;
- 
     width:100%;
+    margin: 0;
 }
 
 h1{
@@ -53,7 +56,7 @@ h1{
     color: rgb(91, 60, 119);
 }
 
-img {
+.logo-home {
     --_g: 10% /45% 45% no-repeat linear-gradient(#000 0 0);
     --m:
       left   var(--_i,0%) top    var(--_g),
@@ -68,7 +71,7 @@ img {
     width: 230px;
     height: 200px;
   }
-  img:hover {
+  .logo-home:hover {
     --_i: 10%;
     filter: grayscale(0);
   }
@@ -80,4 +83,5 @@ img {
     column-gap: 30px;
     margin-top: 30px;
     border-radius: 8px;
+    padding-bottom: 250px;
   }

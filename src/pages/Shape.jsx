@@ -10,17 +10,16 @@ import "../App.css"
 import "../Css/Shapes.css"
 
 function Shape() {
-	
-  const webcamRef = useRef(null);
-  const canvasRef = useRef(null);
-  const [result, setResult] = useState("draw the shape");
-  const [timer, setTimer] = useState(0);
-  const [drawing, setDrawing] = useState(true);
-  const [selected,setSelected]=useState("1")
-  let array=[] // this array will collect points for shapes, [x,y]
-  let index=0;
-  let lastX = -1;
-  let lastY = -1;
+	const webcamRef = useRef(null)
+	const canvasRef = useRef(null)
+	const [result, setResult] = useState("START DRAWING")
+	const [timer, setTimer] = useState(0)
+	const [drawing, setDrawing] = useState(true)
+	const [selected, setSelected] = useState("1")
+	let array = [] // this array will collect points for shapes, [x,y]
+	let index = 0
+	let lastX = -1
+	let lastY = -1
 
 	const resetShape = () => {
 		
@@ -64,8 +63,6 @@ function Shape() {
 				
 				const ctx = canvasRef.current.getContext("2d")
 				if (array.length > 0) {
-
-
 					ctx.beginPath()
 
 					ctx.fillStyle = "Black"
@@ -91,67 +88,106 @@ function Shape() {
 					centerY = centerY / 21
 					centerZ = centerZ / 21
 
-          array.push({ x: centerX, y: centerY });
-          if (
-            Math.sqrt(
-              (centerX - array[0].x) * (centerX - array[0].x) +
-                (centerY - array[0].y) * (centerY - array[0].y)
-            ) < 30 &&
-            index > 30
-          ) {
-          
-            if (evaluateCircle(array)) {
-              ////@Enea add to the UI a pop up window  you draw a circle Good Job
-              ///pop up window React Bootstrap//sound effect
-              
-              setResult("Circle");
-            } else if (evaluateSquare(array)) {
-            
-              setResult("Square");
-            } else if (evaluateTriangle(array)) {
-             
-              setResult("Triangle");
-            } else if(evaluateRectangle(array)){
-				setResult("Rectangle")
-			}else {
-              setResult("Random shape");
-            }
-            resetShape();
-               
+					array.push({ x: centerX, y: centerY })
+					if (
+						Math.sqrt(
+							(centerX - array[0].x) * (centerX - array[0].x) +
+								(centerY - array[0].y) * (centerY - array[0].y)
+						) < 15 &&
+						index > 30
+					) {
+					
+						if (evaluateCircle(array)) {
+							
+							setResult(
+								<div className="image-result">
+									<img
+										style={{ width: "300px", height: "300px" }}
+										src="https://static.vecteezy.com/system/resources/previews/001/192/069/non_2x/circle-png.png"
+										alt="circle"
+									/>
+								</div>
+							)
+						} else if (evaluateSquare(array)) {
+							
+							setResult(
+								<div className="image-result">
+									<img
+										style={{ width: "300px", height: "300px" }}
+										src="https://www.pngmart.com/files/13/Square-PNG-Pic.png"
+										alt="square"
+									/>
+								</div>
+							)
+						} else if (evaluateTriangle(array)) {
+							
+							setResult(
+								<div className="image-result">
+									<img
+										style={{ width: "300px", height: "300px" }}
+										src="https://www.freeiconspng.com/thumbs/triangle-png/black-and-white-triangle-png-16.png"
+										alt="triangle"
+									/>
+								</div>
+							)
+						} else if(evaluateRectangle(array)){
+							setResult(
+								<div className="image-result">
+									<img
+										style={{ width: "300px" }}
+										src="https://www.onlygfx.com/wp-content/uploads/2018/02/rectangle-grunge-frame-4-1.png"
+										alt="rectangle "
+									/>
+								</div>
+							)
+							
+						}else{
+							setResult(
+								<div className="image-result">
+									<img
+										style={{ width: "300px", height: "300px" }}
+										src="https://static.vecteezy.com/system/resources/thumbnails/011/459/127/small/organic-shape-boho-blob-png.png"
+										alt="random shape"
+									/>
+								</div>
+							)
+						}
+						resetShape()
+
+						///evaluate the shape
 					}
 					ctx.beginPath()
-          /*
+					/*
           let base_image = new Image();
           base_image.src = 'https://img.icons8.com/color/120/paint-brush.png';
           base_image.style.width="20px"
           ctx.drawImage(base_image, centerX-80, centerY-80);
           */
-           
+
 					ctx.fillStyle = "lightblue"
-          ctx.strokeStyle="black"
+					ctx.strokeStyle = "black"
 					ctx.arc(centerX, centerY, 10, 0, 2 * 3.14)
-            
+
 					ctx.fill()
-          ctx.stroke()
+					ctx.stroke()
 
 					ctx.closePath()
 
-
-          ctx.beginPath()
-          /*
+					ctx.beginPath()
+					/*
           let base_image = new Image();
           base_image.src = 'https://img.icons8.com/color/120/paint-brush.png';
           base_image.style.width="20px"
           ctx.drawImage(base_image, centerX-80, centerY-80);
           */
-           if(array.length>0){
-					ctx.fillStyle = "red"
-          ctx.strokeStyle="black"
-					ctx.arc(array[0].x, array[0].y, 6, 0, 2 * 3.14)
-            
-					ctx.fill()
-          ctx.stroke()
-           }
+					if (array.length > 0) {
+						ctx.fillStyle = "red"
+						ctx.strokeStyle = "black"
+						ctx.arc(array[0].x, array[0].y, 6, 0, 2 * 3.14)
+
+						ctx.fill()
+						ctx.stroke()
+					}
 
 					ctx.closePath()
 
@@ -173,32 +209,30 @@ function Shape() {
 
 					lastX = centerX
 					lastY = centerY
-					/// drawHand(hand, ctx);
+					
 				}
 			}
 		}
 	}
 
-  useEffect(() => {
-    runHandpose();
+	useEffect(() => {
+		runHandpose()
 
-   let el=document.getElementById("resetBtn")
-   el.addEventListener("click",resetShape)
-   return ()=>{el.removeEventListener("click",resetShape)}
-  }, []);
+		let el = document.getElementById("resetBtn")
+		el.addEventListener("click", resetShape)
+		return () => {
+			el.removeEventListener("click", resetShape)
+		}
+	}, [])
 
 	return (
 		<div className="App">
 
 
 			<div className="timer-button">
-				<div className="result">
-				
-					<h1>Last Result: {result}</h1>
-				</div>
 				<div className="button-web">
 					<div className="buton1" hidden>
-						<button id="resetBtn"  class="button button--piyo">
+						<button id="resetBtn" class="button button--piyo">
 							<div class="button__wrapper">
 								<span class="button__text">Reset</span>
 							</div>
@@ -289,6 +323,39 @@ function Shape() {
 							/>
 						)}
 					</div>
+					<div className="result">
+						<h1>Last Result:</h1>
+						<div className="image-result">{result}</div>
+					</div>
+				</div>
+				<div>
+					<p className="rules">
+						<ul>
+							<li className="li">
+								1. On startup, please be patient for Site to properly load.
+							</li>
+							<li className="li">
+								2. To start drawing. Please place your hand near  the center of
+								the screen and press the draw button.
+							</li>
+							<li className="li">
+								3. Shapes that can be Drawn:  Circle, Square, Rectangle,
+								Triangle
+							</li>
+							<li className="li">
+								4. Reset button: If image is not drawn as intended, please use
+								this button to clear canvas.
+							</li>
+							<li className="li">
+								5. Draw button: After a iteration of shape recognition is
+								complete, please press on draw to begin drawing again.
+							</li>
+							<li className="li">
+								6. Please have fun playing this game and only practice makes
+								perfect when trying to draw a shape correctly.
+							</li>
+						</ul>
+					</p>
 				</div>
 			</div>
 		</div>
