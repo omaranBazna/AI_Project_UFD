@@ -21,11 +21,9 @@ function Shape() {
 	let lastX = -1
 	let lastY = -1
 
-	const resetShape = () => {
-		
+	const resetShape = () => {	
 		index = 0
-		array = []
-		
+		array = []	
 		setDrawing(false)
 	}
 

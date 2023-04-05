@@ -1,0 +1,28 @@
+.App {
+    background-image: url("../assets/kidWallpaper.jpeg");
+}
+
+.dropdown{
+    display: flex;
+    column-gap: 60px;
+    flex-direction: column;
+    row-gap: 150px;
+}
+
+.drops{
+    width: 100px;
+    height: 70px;
+}
+
+select{
+    width: 150px;
+    height: 70px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;        
+    background-color: aquamarine;
+    font-size: x-large;
+    font-family: 'RampartOne';
+    color: rgb(100, 30, 30);
+}
