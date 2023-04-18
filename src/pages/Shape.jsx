@@ -25,10 +25,8 @@ function Shape() {
 		
 		index = 0
 		array = []
-		
 		setDrawing(false)
 	}
-
 	const runHandpose = async () => {
 		const net = await handpose.load()
 		//  Loop and detect hands
@@ -36,7 +34,6 @@ function Shape() {
 			detect(net)
 		}, 10)
 	}
-
 	const detect = async (net) => {
 		// Check data is available
 		if (
@@ -48,7 +45,6 @@ function Shape() {
 			const video = webcamRef.current.video
 			const videoWidth = webcamRef.current.video.videoWidth
 			const videoHeight = webcamRef.current.video.videoHeight
-
 			// Set video width
 			webcamRef.current.video.width = videoWidth
 			webcamRef.current.video.height = videoHeight
@@ -64,7 +60,6 @@ function Shape() {
 				const ctx = canvasRef.current.getContext("2d")
 				if (array.length > 0) {
 					ctx.beginPath()
-
 					ctx.fillStyle = "Black"
 					ctx.lineWidth = 5
 					ctx.moveTo(array[0].x, array[0].y)
