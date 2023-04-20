@@ -1,10 +1,5 @@
 // Threshold can be adjusted to increase efficiency of indetified shape
-<<<<<<< HEAD
-let threshold = 0.03;
-/*#threshold */
-=======
 let threshold = 0.19;
->>>>>>> optimize_shape_recognition
 
 const parameterOfShape = (array) => {
   let p = 0;
@@ -65,7 +60,7 @@ export const evaluateCircle = (array, th = threshold) => {
   ///calculate the area of the shape
   ///calculate the parameter of the shope
   ///A/P^2  =1/(4*PI)
-
+  th = 0.12;
   const parameter = parameterOfShape(array);
   const [centerX, centerY] = centerOfShape(array);
   const area = areaOfShape(array, centerX, centerY);
@@ -73,13 +68,7 @@ export const evaluateCircle = (array, th = threshold) => {
   ///in perfect circle delta=1
   const delta = (area / (parameter * parameter)) * 4 * Math.PI;
 
-<<<<<<< HEAD
-  console.log(delta);
-  /*#threshold circle */
-  if (Math.abs(delta - 1) < threshold) {
-=======
   if (Math.abs(delta - 1) < th) {
->>>>>>> optimize_shape_recognition
     return true;
   } else {
     return false;
@@ -97,31 +86,8 @@ export const evaluateSquare = (array, th = threshold) => {
 
   ///in perfect circle delta=1
   const delta = (area / (parameter * parameter)) * 16;
-<<<<<<< HEAD
-  /*#threshold square */
-  if (Math.abs(delta - 1) < threshold * 3) {
-    if (evaluateRectangle(array)) {
-      return true;
-    }
-    return false;
-  } else {
-    return false;
-  }
-};
-
-export const evaluateTriangle = (array) => {
-  const parameter = parameterOfShape(array);
-  const [centerX, centerY] = centerOfShape(array);
-  const area = areaOfShape(array, centerX, centerY);
-
-  ///in perfect circle delta=1
-  const delta = ((area / (parameter * parameter)) * 36) / Math.sqrt(3);
-  /*#threshold triangle */
-  if (Math.abs(delta - 1) < threshold * 5) {
-=======
-
+  th = 0.14;
   if (Math.abs(delta - 1) < th) {
->>>>>>> optimize_shape_recognition
     return true;
   } else {
     return false;
@@ -132,7 +98,7 @@ export const evaluateTriangle = (array, th = threshold) => {
   const parameter = parameterOfShape(array);
   const [centerX, centerY] = centerOfShape(array);
   const area = areaOfShape(array, centerX, centerY);
-
+  th = 0.4;
   const delta = ((area / (parameter * parameter)) * 36) / Math.sqrt(3);
 
   if (Math.abs(delta - 1) < th) {
