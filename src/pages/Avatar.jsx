@@ -130,6 +130,7 @@ function Avatar() {
 					<select
 						className="eye"
 						style={{
+							width:"200px",
 							boxShadow:
 								"rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
 						}}
@@ -146,6 +147,7 @@ function Avatar() {
 					<select
 						className="nose"
 						style={{
+							width:"200px",
 							color: "black",
 							background: "aqua",
 							boxShadow:
@@ -163,6 +165,7 @@ function Avatar() {
 				<div className="drops">
 					<select
 						style={{
+							width:"200px",
 							color: "black",
 							background: "orange",
 							boxShadow:
@@ -191,7 +194,7 @@ function Avatar() {
 							right: 0,
 							textAlign: "center",
 							zindex: 9,
-							width: 1200,
+							width: 900,
 							height: 480,
 						}}
 						mirrored={true}></Webcam>
