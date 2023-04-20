@@ -32,7 +32,9 @@ function Avatar() {
 	const [eye, setEye] = useState("eye1")
 	const [nose, setNose] = useState("nose1")
 	const [mouth, setMouth] = useState("mouth1")
-
+    const [posX,setPosX]=useState(0)
+	const [posY,setPosY]=useState(0)
+	
 	let data = {
 		eye1: {
 			left: eye1url,
@@ -180,6 +182,13 @@ function Avatar() {
 						<option value="mouth4">Mouth4</option>
 						<option value="mouth5">Mouth5</option>
 					</select>
+					<br></br>
+					<br></br>
+					<input type="range" min="-400" max="400" value={posX} onChange={(e)=>{console.log(e.target.value)
+						 setPosX(e.target.value*1)}} />
+						 <br></br>
+					<input type="range" min="-400" max="400" value={posY} onChange={(e)=>{setPosY(e.target.value*1)}} />
+				
 				</div>
 			</div>
 			<div className="camera">
@@ -203,8 +212,8 @@ function Avatar() {
 						src={data[eye].left}
 						style={{
 							position: "absolute",
-							top: leftEye.y * 1 + 60,
-							left: 1070 - leftEye.x,
+							top: leftEye.y * 1+posY + 60,
+							left: 1070+posX - leftEye.x,
 							width: "50px",
 						}}
 					/>
@@ -212,8 +221,8 @@ function Avatar() {
 						src={data[eye].right}
 						style={{
 							position: "absolute",
-							top: rightEye.y * 1 + 60,
-							left: 1050 - rightEye.x,
+							top: rightEye.y * 1+posY + 60,
+							left: 1050+posX- rightEye.x,
 							width: "50px",
 						}}
 					/>
@@ -221,8 +230,8 @@ function Avatar() {
 						src={data[nose]}
 						style={{
 							position: "absolute",
-							top: nosep.y * 1 + 20,
-							left: 1055 - nosep.x,
+							top: nosep.y * 1+posY + 20,
+							left: 1055+posX - nosep.x,
 							width: "60px",
 						}}
 					/>
@@ -230,8 +239,8 @@ function Avatar() {
 						src={data[mouth]}
 						style={{
 							position: "absolute",
-							top: nosep.y * 1 + 85,
-							left: 1050 - nosep.x,
+							top: nosep.y * 1+posY + 85,
+							left: 1050+posX - nosep.x,
 							width: "80px",
 						}}
 					/>
