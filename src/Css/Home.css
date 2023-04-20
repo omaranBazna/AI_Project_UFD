@@ -9,7 +9,7 @@
  }
  
  #root{
-   
+    background-image: url("../assets/backround.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
