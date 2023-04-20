@@ -6,7 +6,26 @@ import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detec
 import Webcam from "react-webcam"
 import "../Css/Avatar.css"
 import { Dropdown } from "primereact/dropdown"
-
+import nose1url from "../assets/Transparentnose2.png"
+import nose2url from "../assets/Transparentnose3.png"
+import nose3url from "../assets/Transparentnose4.png"
+import nose4url from "../assets/Transparentnose5.png"
+import nose5url from "../assets/Transparentnose6.png"
+import mouth1url from "../assets/Transparentmouth1.png" 
+import mouth2url from "../assets/Transparentmouth2.png"
+import mouth3url from "../assets/Transparentmouth3.png"
+import mouth4url from "../assets/Transparentmouth4.png"
+import mouth5url from "../assets/Transparentmouth5.png"
+import eye1url from "../assets/Eye1.png"
+import eye2url from "../assets/Eye2.png"
+import eye3url from "../assets/Eye3.png"
+import eye4url from "../assets/Eye4.png"
+import eye5url from "../assets/Eye5.png"
+import eye6url from "../assets/Eye6.png"
+import eye7url from "../assets/Eye11.png"
+import eye8url from "../assets/Eye12.png"
+import eye9url from "../assets/Eye13.png"
+import eye10url from "../assets/Eye14.png"          
 function Avatar() {
 	const webcamRef = useRef(null)
 
@@ -16,22 +35,46 @@ function Avatar() {
 
 	let data = {
 		eye1: {
-			left: "https://i.ibb.co/cCt4nnk/leftEye.jpg",
-			right: "https://i.ibb.co/30ZmHZn/rightEye.jpg",
+			left: eye1url,
+			right: eye2url,
 		},
 		nose1:
-			"https://www.shutterstock.com/image-vector/nose-vector-illustration-260nw-755300977.jpg",
+			nose1url,
 		mouth1:
-			"https://cdn2.vectorstock.com/i/1000x1000/93/76/smile-mouth-and-tongue-isolated-cartoon-design-vector-26949376.jpg",
+			mouth1url,
 
 		eye2: {
-			left: "",
-			right: "",
+			left: eye3url,
+			right: eye4url,
 		},
 		nose2:
-			"https://c8.alamy.com/comp/2BH5KRB/cartoon-character-design-concept-of-nose-cartoon-design-style-with-wink-eye-2BH5KRB.jpg",
+			nose2url,	
 		mouth2:
-			"https://cdn2.vectorstock.com/i/1000x1000/93/76/smile-mouth-and-tongue-isolated-cartoon-design-vector-26949376.jpg",
+			mouth2url,
+		eye3: {
+			left: eye5url,
+			right: eye6url,
+		},
+		nose3:
+			nose3url,
+		mouth3:
+			mouth3url,
+		eye4: {
+			left: eye7url,
+			right: eye8url,
+		},
+		nose4:
+			nose4url,
+		mouth4:
+			mouth4url,
+		eye5: {
+			left: eye9url,
+			right: eye10url,
+		},
+		nose5:
+			nose5url,
+		mouth5:
+			mouth5url,						
 	}
 	const [leftEye, setLeftEye] = useState({ x: 0, y: 0, z: 0 })
 	const [rightEye, setRightEye] = useState({ x: 0, y: 0, z: 0 })
@@ -94,6 +137,9 @@ function Avatar() {
 						onChange={(e) => setEye(e.target.value)}>
 						<option value="eye1">Eye1</option>
 						<option value="eye2">Eye2</option>
+						<option value="eye3">Eye3</option>
+						<option value="eye4">Eye4</option>
+						<option value="eye5">Eye5</option>
 					</select>
 				</div>
 				<div className="drops">
@@ -109,6 +155,9 @@ function Avatar() {
 						onChange={(e) => setNose(e.target.value)}>
 						<option value="nose1">Nose1</option>
 						<option value="nose2">Nose2</option>
+						<option value="nose3">Nose3</option>
+						<option value="nose4">Nose4</option>
+						<option value="nose5">Nose5</option>
 					</select>
 				</div>
 				<div className="drops">
@@ -124,6 +173,9 @@ function Avatar() {
 						onChange={(e) => setMouth(e.target.value)}>
 						<option value="mouth1">Mouth1</option>
 						<option value="mouth2">Mouth2</option>
+						<option value="mouth3">Mouth3</option>
+						<option value="mouth4">Mouth4</option>
+						<option value="mouth5">Mouth5</option>
 					</select>
 				</div>
 			</div>
@@ -149,7 +201,7 @@ function Avatar() {
 						style={{
 							position: "absolute",
 							top: leftEye.y * 1 + 60,
-							left: 940 - leftEye.x,
+							left: 1070 - leftEye.x,
 							width: "50px",
 						}}
 					/>
@@ -158,7 +210,7 @@ function Avatar() {
 						style={{
 							position: "absolute",
 							top: rightEye.y * 1 + 60,
-							left: 920 - rightEye.x,
+							left: 1050 - rightEye.x,
 							width: "50px",
 						}}
 					/>
@@ -167,7 +219,7 @@ function Avatar() {
 						style={{
 							position: "absolute",
 							top: nosep.y * 1 + 20,
-							left: 930 - nosep.x,
+							left: 1055 - nosep.x,
 							width: "60px",
 						}}
 					/>
@@ -175,8 +227,8 @@ function Avatar() {
 						src={data[mouth]}
 						style={{
 							position: "absolute",
-							top: nosep.y * 1 + 70,
-							left: 920 - nosep.x,
+							top: nosep.y * 1 + 85,
+							left: 1050 - nosep.x,
 							width: "80px",
 						}}
 					/>
