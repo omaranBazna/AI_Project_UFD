@@ -1,6 +1,10 @@
 // Threshold can be adjusted to increase efficiency of indetified shape
+<<<<<<< HEAD
 let threshold = 0.03;
 /*#threshold */
+=======
+let threshold = 0.19;
+>>>>>>> optimize_shape_recognition
 
 const parameterOfShape = (array) => {
   let p = 0;
@@ -56,11 +60,12 @@ const centerOfShape = (array) => {
 
   return [centerX, centerY];
 };
-///@Rahoul add clear description how this function work to the report
-export const evaluateCircle = (array) => {
+
+export const evaluateCircle = (array, th = threshold) => {
   ///calculate the area of the shape
   ///calculate the parameter of the shope
   ///A/P^2  =1/(4*PI)
+
   const parameter = parameterOfShape(array);
   const [centerX, centerY] = centerOfShape(array);
   const area = areaOfShape(array, centerX, centerY);
@@ -68,25 +73,31 @@ export const evaluateCircle = (array) => {
   ///in perfect circle delta=1
   const delta = (area / (parameter * parameter)) * 4 * Math.PI;
 
+<<<<<<< HEAD
   console.log(delta);
   /*#threshold circle */
   if (Math.abs(delta - 1) < threshold) {
+=======
+  if (Math.abs(delta - 1) < th) {
+>>>>>>> optimize_shape_recognition
     return true;
   } else {
     return false;
   }
 };
 
-export const evaluateSquare = (array) => {
+export const evaluateSquare = (array, th = threshold) => {
   ///calculate the area of the shape
   ///calculate the parameter of the shope
   ///A/P^2  =1/16
+
   const parameter = parameterOfShape(array);
   const [centerX, centerY] = centerOfShape(array);
   const area = areaOfShape(array, centerX, centerY);
 
   ///in perfect circle delta=1
   const delta = (area / (parameter * parameter)) * 16;
+<<<<<<< HEAD
   /*#threshold square */
   if (Math.abs(delta - 1) < threshold * 3) {
     if (evaluateRectangle(array)) {
@@ -107,12 +118,30 @@ export const evaluateTriangle = (array) => {
   const delta = ((area / (parameter * parameter)) * 36) / Math.sqrt(3);
   /*#threshold triangle */
   if (Math.abs(delta - 1) < threshold * 5) {
+=======
+
+  if (Math.abs(delta - 1) < th) {
+>>>>>>> optimize_shape_recognition
     return true;
   } else {
     return false;
   }
 };
-export const evaluateRectangle = (array) => {
+
+export const evaluateTriangle = (array, th = threshold) => {
+  const parameter = parameterOfShape(array);
+  const [centerX, centerY] = centerOfShape(array);
+  const area = areaOfShape(array, centerX, centerY);
+
+  const delta = ((area / (parameter * parameter)) * 36) / Math.sqrt(3);
+
+  if (Math.abs(delta - 1) < th) {
+    return true;
+  } else {
+    return false;
+  }
+};
+export const evaluateRectangle = (array, th = threshold) => {
   const parameter = parameterOfShape(array);
   const [centerX, centerY] = centerOfShape(array);
   const area = areaOfShape(array, centerX, centerY);
@@ -140,9 +169,9 @@ export const evaluateRectangle = (array) => {
   let width = maxX - minX;
   let height = maxY - minY;
   let boundArea = width * height;
-
+  th = 0.2;
   if (boundArea > 0) {
-    if (Math.abs(area / boundArea) > 0.75) {
+    if (Math.abs(area / boundArea - 1) <= th) {
       return true;
     } else {
       return false;

@@ -1,9 +1,3 @@
-.App-header{
-    background-color:unset;
-}
-@import url(https://fonts.googleapis.com/css?family=Roboto:700);
-
-
 /* CSS */
 .button-92 {
   --c: #fff;
@@ -42,7 +36,7 @@
 }
 
 .App{
-  background-image: url(../assets/backround.jpeg);
+ 
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
