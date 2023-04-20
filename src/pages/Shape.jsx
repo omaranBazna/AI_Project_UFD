@@ -125,18 +125,7 @@ function Shape() {
 									/>
 								</div>
 							)
-						} else if(evaluateRectangle(array)){
-							setResult(
-								<div className="image-result">
-									<img
-										style={{ width: "300px" }}
-										src="https://www.onlygfx.com/wp-content/uploads/2018/02/rectangle-grunge-frame-4-1.png"
-										alt="rectangle "
-									/>
-								</div>
-							)
-							
-						}else{
+						} else{
 							setResult(
 								<div className="image-result">
 									<img

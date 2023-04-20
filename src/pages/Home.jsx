@@ -23,6 +23,7 @@ const Home=()=>{
 						<Link to="/avatar">
 							<img className="logo-home" src={emoji} alt="emoji" />
 						</Link>
+						
 					</div>
 				</div>
 			</div>
