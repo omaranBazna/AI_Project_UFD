@@ -1,5 +1,5 @@
 # AI Drawing Game and Avatar Builder
-
+Team members: Omaran Bazna, Rahul Oad, Enea
 
 ## Shape recognition : 
 
